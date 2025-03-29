@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # project apps
     'users'
+    'dogs'
 ]
 
 MIDDLEWARE = [
