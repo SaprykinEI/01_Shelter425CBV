@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'dogs/base.html' %}
+{% load my_tags %}
+{% block content %}
 
-</body>
-</html>
+<form method="post" enctype="multipart/form-data" class="row" action="">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                {% if object %}
+                Вы уверены, что хотите удалить собаку?
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <img class="card-img-top"
+                     src="{{object.photo|dogs_media }}" width="300" height="320"
+                     alt="Card image cap">
+
+            <div class="card-body">
+                <p class="card-text">{{ object.name|title }}</p>
+            </div>
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Исправленный синтаксис -->
+            <button type="submit" class="btn btn-outline-danger float-right">
+                {% if object %}
+                Удалить
+                {% endif %}
+            </button>
+            <a class="btn btn-outline-primary float-left" href="{% url 'dogs:dog_detail' object.pk %}">Назад</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
