@@ -1,0 +1,20 @@
+[
+  {
+    "fields": {
+      "password": "pbkdf2_sha256$720000$vjbaVveUfeHUNbqQ2Y2WMM$pNlKnA3AHgMKe6ozW4R81c30nY/B+5LSz2dOJA5Q9gk=",
+      "last_login": "2025-03-29T09:37:39.241Z",
+      "is_superuser": true,
+      "first_name": "Admin",
+      "last_name": "Adminov",
+      "is_staff": true,
+      "date_joined": "2025-03-29T09:37:25.975Z",
+      "email": "admin@web.top",
+      "phone": null,
+      "telegram": null,
+      "is_active": true,
+      "groups": [],
+      "user_permissions": []
+    },
+    "model": "users.user",
+    "pk": 1
+  }]

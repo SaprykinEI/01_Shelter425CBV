@@ -1,0 +1,64 @@
+[
+  {
+    "model": "dogs.breed",
+    "pk": 1,
+    "fields": {
+      "name": "Немецкая овчарка",
+      "description": "Хороший сторож, большая и пушистая"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 2,
+    "fields": {
+      "name": "Колли",
+      "description": "Снималась в кино"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 3,
+    "fields": {
+      "name": "Джек Рассел Терьер",
+      "description": "Активная парода известна по фильму \"Маска\""
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 4,
+    "fields": {
+      "name": "Чихуахуа",
+      "description": "Зло во плоти"
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 1,
+    "fields": {
+      "name": "Мухтар",
+      "breed": 1,
+      "photo": "dogs/AQAOISevTHRrmjVFz1VZts9SPc7eWoDOfSpAeLXISVq5apasdx3hlvqI47gEOG28fCKbjJqRP_fTRlo2EdVpep-l4Zs.jpg",
+      "birth_date": "2024-10-16"
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 2,
+    "fields": {
+      "name": "Лесси",
+      "breed": 2,
+      "photo": "dogs/bdc8969e373abb0188cf1b97f99adbe8.jpg",
+      "birth_date": "2023-10-08"
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 4,
+    "fields": {
+      "name": "Рен",
+      "breed": 4,
+      "photo": "dogs/4722802b58e95a3678feb6ccfab66c97_LsEI0oy.jpg",
+      "birth_date": "2022-01-05"
+    }
+  }
+]
