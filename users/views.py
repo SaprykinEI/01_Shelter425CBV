@@ -3,12 +3,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from users.forms import UserRegisterForm, UserLoginForm
+from users.forms import UserRegisterForm, UserLoginForm, UserUpdateForm
 
 
 def user_register_view(request):
+    form = UserRegisterForm(request.POST)
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             print(new_user)
@@ -51,6 +51,23 @@ def user_profile_view(request):
         'title': f"Ваш профиль: {user_name}"
     }
     return render(request, 'users/user_profile_read_only.html', context=context)
+
+
+@login_required
+def user_update_view(request):
+    user_object = request.user
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, request.FILES, instance=user_object)
+        if form.is_valid():
+            user_object = form.save()
+            user_object.save()
+            return HttpResponseRedirect(reverse('users:user_profile'))
+    context = {
+        'object': user_object,
+        'title': f"Изменить профиль {user_object.first_name} {user_object.last_name}",
+        'form': UserUpdateForm(instance=user_object)
+    }
+    return render(request, 'users/user_update.html', context)
 
 
 @login_required
