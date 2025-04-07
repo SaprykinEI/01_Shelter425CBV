@@ -10,7 +10,7 @@ def index_view(request):
     """Функция отвечает за отображение главной страницы питомника."""
     context = {
         'objects_list': Breed.objects.all()[:3],
-        'title': "Питомник - Главное"
+        'title': "Питомник - Главная"
     }
     return render(request, 'dogs/index.html', context=context)
 
