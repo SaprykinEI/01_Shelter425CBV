@@ -1,6 +1,8 @@
 from django.db import models
+from django.conf import settings
 
 from users.models import NULLABLE
+
 # Create your models here.
 
 class Breed(models.Model):
@@ -20,6 +22,8 @@ class Dog(models.Model):
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE, verbose_name='Порода')
     photo = models.ImageField(upload_to='dogs/', **NULLABLE, verbose_name='Фотография')
     birth_date = models.DateField(**NULLABLE, verbose_name='Дата рождения')
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Хозяин')
 
     def __str__(self):
         return f'{self.name} ({self.breed})'
