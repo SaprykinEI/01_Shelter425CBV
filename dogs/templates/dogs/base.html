@@ -33,6 +33,7 @@
                         {% if user.is_authenticated %}
                             <li><a href="{% url 'users:user_profile' %}" class="text-white">Профиль</a></li>
                             <li><a href="{% url 'users:user_logout' %}" class="text-white">Выход</a></li>
+                            <span class="text-white">{{ user }}</span>
                         {% else %}
                             <li><a href="{% url 'users:user_login' %}" class="text-white">Вход</a></li>
                             <li><a href="{% url 'users:user_register' %}" class="text-white">Регистрация</a></li>
@@ -51,6 +52,9 @@
                     <circle cx="12" cy="13" r="4"></circle>
                 </svg>
                 <strong>Питомник</strong>
+                {% if user.is_authenticated %}
+                <span style="margin-left: 700px" class="text-white ">{{ user }}</span>
+                {% endif %}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
