@@ -41,7 +41,7 @@ def user_login_view(request):
     return render(request, 'users/user_login.html', context=context)
 
 
-@login_required
+@login_required(login_url='users:user_login')
 def user_profile_view(request):
     user_object = request.user
     if user_object.first_name and user_object.last_name:
@@ -54,7 +54,7 @@ def user_profile_view(request):
     return render(request, 'users/user_profile_read_only.html', context=context)
 
 
-@login_required
+@login_required(login_url='users:user_login')
 def user_update_view(request):
     user_object = request.user
     if request.method == 'POST':
@@ -70,7 +70,7 @@ def user_update_view(request):
     }
     return render(request, 'users/user_update.html', context=context)
 
-@login_required
+@login_required(login_url='users:user_login')
 def user_change_password_view(request):
     user_object = request.user
     form = UserChangePasswordForm(user_object, request.POST)
@@ -79,7 +79,7 @@ def user_change_password_view(request):
             user_object = form.save()
             update_session_auth_hash(request, user_object)
             messages.success(request, 'Пароль был успешно изменен!')
-            return HttpResponseRedirect('users:user_profile')
+            return HttpResponseRedirect(reverse('users:user_profile'))
         else:
             messages.error(request, 'Не удалось изменить пароль')
     context = {
@@ -90,7 +90,7 @@ def user_change_password_view(request):
 
 
 
-@login_required
+@login_required(login_url='users:user_login')
 def user_logout_view(request):
     logout(request)
     return redirect('dogs:index')
