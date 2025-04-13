@@ -8,9 +8,13 @@
              src="{{object.photo|dogs_media }}" width="300" height="320"
              alt="Card image cap">
         <div class="card-body">
-            <p class="card-text">{{ object.name }}</p><br>
-            <p class="card-text">{{ object.breed.name }}</p>
-            <span class="text-muted">{{ object.birth_date|default:"-"}}</span>
+            <p class="card-text">Кличка: {{ object.name }}</p><br>
+            <p class="card-text">Порода: {{ object.breed.name }}</p><br>
+            <span class="text-muted">Дата рождения: {{ object.birth_date|default:"-"}}</span><br>
+            <span class="text-muted">Эл. почта хозяина: {{ object.owner|default:"Без хозяина"}}</span><br>
+            <span class="text-muted">Имя хозяина: {{ object.owner.first_name|default:"Не указано"}}</span><br>
+            <span class="text-muted">Телефон хозяина: {{ object.owner.phone|default:"Не указано"}}</span><br>
+            <span class="text-muted">Телеграм хозяина: {{ object.owner.telegram|default:"Не указано"}}</span><br>
         </div>
         <div class="card-footer">
             <a class="btn btn-link" href="{% url 'dogs:dog_update' object.pk %}">Обновить</a>
