@@ -3,45 +3,34 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
+from django.views.generic import CreateView, UpdateView
+from django.urls import reverse_lazy
 import random
 import string
 
+from users.models import User
 from users.forms import UserRegisterForm, UserLoginForm, UserUpdateForm, UserChangePasswordForm
 from users.services import send_new_password, send_register_email
 
 
-def user_register_view(request):
-    form = UserRegisterForm(request.POST)
-    if request.method == "POST":
-        if form.is_valid():
-            new_user = form.save()
-            new_user.set_password(form.cleaned_data['password'])
-            new_user.save()
-            send_register_email(new_user.email)
-            return HttpResponseRedirect(reverse('users:user_login'))
-    context = {
-        'title': 'Создать аккаунт',
-        'form': UserRegisterForm
+class UserRegisterView(CreateView):
+    model = User
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('users:user_login')
+    template_name = 'users/user_register.html'
+    extra_context = {
+        'title': 'Создать аккаунт'
     }
-    return render(request, 'users/user_register.html', context=context)
 
 
-def user_login_view(request):
-    if request.method == 'POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            cleaned_data = form.cleaned_data
-            user = authenticate(email=cleaned_data['email'], password=cleaned_data['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect(reverse('dogs:index'))
-            return HttpResponse("Вы не зарегистрированы либо неверный пароль, либо вы забанены")
-    context = {
-        'title': "Вход в аккаунт",
-        'form': UserLoginForm
+class UserLoginView(LoginView):
+    form_class = UserLoginForm
+    template_name = 'users/user_login.html'
+    extra_context = {
+        'title': "Вход в аккаунт"
     }
-    return render(request, 'users/user_login.html', context=context)
+
 
 
 @login_required(login_url='users:user_login')
