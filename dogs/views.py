@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from dogs.models import Breed, Dog
 from dogs.forms import DogForm
 
+
 def index_view(request):
     """Функция отвечает за отображение главной страницы питомника."""
     context = {
@@ -14,6 +15,7 @@ def index_view(request):
     }
     return render(request, 'dogs/index.html', context=context)
 
+
 def breeds_list_view(request):
     """Функция отображает список всех пород собак, доступных в питомнике."""
     context = {
@@ -21,6 +23,7 @@ def breeds_list_view(request):
         'title': "Питомник - Все наши породы"
     }
     return render(request, 'dogs/breeds.html',context=context)
+
 
 def breed_dogs_list_view(request, pk: int):
     """Отображение списка собак определенной породы."""
@@ -32,7 +35,6 @@ def breed_dogs_list_view(request, pk: int):
     }
     return render(request, 'dogs/dogs.html', context=context)
 
-#Create Read Update Delete(CRUD)
 
 def dogs_list_view(request):
     """Вывод списка всех собак на отдельной странице"""
@@ -41,6 +43,8 @@ def dogs_list_view(request):
         'title': f"Все наши собаки",
     }
     return render(request, 'dogs/dogs.html', context=context)
+
+
 @login_required(login_url='users:user_login')
 def dog_create_view(request):
     """ Создание новой собаки в базе данных через форму"""
@@ -57,6 +61,7 @@ def dog_create_view(request):
     }
     return render(request, 'dogs/create_update.html', context=context)
 
+
 @login_required(login_url='users:user_login')
 def dog_detail_view(request, pk):
     """Обрабатывает запрос для отображения подробной информации"""
@@ -66,6 +71,7 @@ def dog_detail_view(request, pk):
         'title': dog_object,
     }
     return render(request, 'dogs/detail.html', context=context)
+
 
 @login_required(login_url='users:user_login')
 def dog_update_view(request, pk):
@@ -83,6 +89,7 @@ def dog_update_view(request, pk):
         'form': DogForm(instance=dog_object),
     }
     return render(request, 'dogs/create_update.html', context=context)
+
 
 @login_required(login_url='users:user_login')
 def dog_delete_view(request, pk):
