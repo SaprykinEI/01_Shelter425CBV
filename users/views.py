@@ -71,30 +71,8 @@ class UserPasswordChangeView(PasswordChangeView):
         context_data['title'] = f"Изменить пароль {self.request.user}"
         return context_data
 
-
-# @login_required(login_url='users:user_login')
-# def user_change_password_view(request):
-#     user_object = request.user
-#     form = UserChangePasswordForm(user_object, request.POST)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             user_object = form.save()
-#             update_session_auth_hash(request, user_object)
-#             messages.success(request, 'Пароль был успешно изменен!')
-#             return HttpResponseRedirect(reverse('users:user_profile'))
-#         else:
-#             messages.error(request, 'Не удалось изменить пароль')
-#     context = {
-#         'title': f"Изменить пароль {user_object.first_name} {user_object.last_name}",
-#         'form': form
-#     }
-#     return render(request, 'users/user_change_password.html', context=context)
-
-
-@login_required(login_url='users:user_login')
-def user_logout_view(request):
-    logout(request)
-    return redirect('dogs:index')
+class UserLogoutView(LogoutView):
+    pass
 
 
 @login_required(login_url='users:user_login')
