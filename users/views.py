@@ -23,6 +23,9 @@ class UserRegisterView(CreateView):
         'title': 'Создать аккаунт'
     }
 
+    def form_valid(self, form):
+        self.object
+
 
 class UserLoginView(LoginView):
     form_class = UserLoginForm
