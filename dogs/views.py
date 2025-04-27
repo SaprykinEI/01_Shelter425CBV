@@ -52,7 +52,7 @@ class DogListView(ListView):
 class DogCreateView(LoginRequiredMixin, CreateView):
     model = Dog
     form_class = DogForm
-    template_name = 'dogs/create_update.html'
+    template_name = 'dogs/create.html'
     extra_context = {
         'title': 'Добавить собаку'
     }
