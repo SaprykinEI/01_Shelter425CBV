@@ -15,30 +15,38 @@ from dogs.forms import DogForm, DogParentForm
 def index_view(request):
     """Функция отвечает за отображение главной страницы питомника."""
     context = {
-        'objects_list': Breed.objects.all()[:3],
+        'object_list': Breed.objects.all()[:3],
         'title': "Питомник - Главная"
     }
     return render(request, 'dogs/index.html', context=context)
 
 
-def breeds_list_view(request):
-    """Функция отображает список всех пород собак, доступных в питомнике."""
-    context = {
-        'objects_list': Breed.objects.all(),
-        'title': "Питомник - Все наши породы"
+# def breeds_list_view(request):
+#     """Функция отображает список всех пород собак, доступных в питомнике."""
+#     context = {
+#         'object_list': Breed.objects.all(),
+#         'title': "Питомник - Все наши породы"
+#     }
+#     return render(request, 'dogs/breeds.html',context=context)
+
+class BreedListView(ListView):
+    model = Breed
+    extra_context = {
+        'title': 'Все наши породы'
     }
-    return render(request, 'dogs/breeds.html',context=context)
+    template_name = 'dogs/breeds.html'
 
 
-def breed_dogs_list_view(request, pk: int):
-    """Отображение списка собак определенной породы."""
-    breed_object = Breed.objects.get(pk=pk)
-    context = {
-        'objects_list': Dog.objects.filter(breed_id=pk),
-        'title': f"Собаки породы - {breed_object.name}",
-        'breed_pk': breed_object.pk
+class DogBreedListView(LoginRequiredMixin, ListView):
+    model = Dog
+    template_name = 'dogs/dogs.html'
+    extra_context = {
+        'title': 'Собаки выбранной породы'
     }
-    return render(request, 'dogs/dogs.html', context=context)
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(breed_id=self.kwargs.get('pk'))
+        return queryset
 
 
 class DogListView(ListView):
