@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template.context_processors import request
 
 from django.http import Http404
@@ -144,3 +144,13 @@ class DogDeleteView(LoginRequiredMixin, DeleteView):
         object_ = self.get_object()
         context_data['title'] = f'Удалить собаку {object_}'
         return context_data
+
+
+def dog_toggle_activity(request, pk):
+    dog_item = get_object_or_404(Dog, pk=pk)
+    if dog_item.is_active:
+        dog_item.is_active = False
+    else:
+        dog_item.is_active = True
+    dog_item.save()
+    return redirect(reverse('dogs:dogs_list'))

@@ -8,7 +8,7 @@ from users.forms import StyleFormMixin
 class DogForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Dog
-        exclude = ('owner',)
+        exclude = ('owner', 'is_active', )
 
     def clean_birth_date(self):
         clean_data = self.cleaned_data['birth_date']
