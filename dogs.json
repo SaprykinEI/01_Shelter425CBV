@@ -3,8 +3,8 @@
     "model": "dogs.breed",
     "pk": 1,
     "fields": {
-      "name": "Немецкая овчарка",
-      "description": "Хороший сторож, большая и пушистая"
+      "name": "Джек Рассел Терьер",
+      "description": "Охотничьи"
     }
   },
   {
@@ -12,53 +12,46 @@
     "pk": 2,
     "fields": {
       "name": "Колли",
-      "description": "Снималась в кино"
+      "description": "Пушистый"
     }
   },
   {
     "model": "dogs.breed",
     "pk": 3,
     "fields": {
-      "name": "Джек Рассел Терьер",
-      "description": "Активная парода известна по фильму \"Маска\""
-    }
-  },
-  {
-    "model": "dogs.breed",
-    "pk": 4,
-    "fields": {
-      "name": "Чихуахуа",
-      "description": "Зло во плоти"
+      "name": "Овчарка",
+      "description": "Охранник"
     }
   },
   {
     "model": "dogs.dog",
     "pk": 1,
     "fields": {
-      "name": "Мухтар",
+      "name": "Рич",
       "breed": 1,
-      "photo": "dogs/AQAOISevTHRrmjVFz1VZts9SPc7eWoDOfSpAeLXISVq5apasdx3hlvqI47gEOG28fCKbjJqRP_fTRlo2EdVpep-l4Zs.jpg",
-      "birth_date": "2024-10-16"
+      "photo": "dogs/1640386616_1-sobakovod-club-p-sobaki-dzhek-rasa-sobaka-1.jpg",
+      "birth_date": "2022-01-05",
+      "owner": 1
     }
   },
   {
-    "model": "dogs.dog",
+    "model": "dogs.dogparent",
+    "pk": 1,
+    "fields": {
+      "dogs": 1,
+      "name": "Бернард",
+      "breed": 1,
+      "birth_date": "2019-10-23"
+    }
+  },
+  {
+    "model": "dogs.dogparent",
     "pk": 2,
     "fields": {
-      "name": "Лесси",
-      "breed": 2,
-      "photo": "dogs/bdc8969e373abb0188cf1b97f99adbe8.jpg",
-      "birth_date": "2023-10-08"
-    }
-  },
-  {
-    "model": "dogs.dog",
-    "pk": 4,
-    "fields": {
-      "name": "Рен",
-      "breed": 4,
-      "photo": "dogs/4722802b58e95a3678feb6ccfab66c97_LsEI0oy.jpg",
-      "birth_date": "2022-01-05"
+      "dogs": 1,
+      "name": "Берта",
+      "breed": 1,
+      "birth_date": "2018-10-20"
     }
   }
 ]
