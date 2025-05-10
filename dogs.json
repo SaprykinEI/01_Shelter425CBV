@@ -31,6 +31,7 @@
       "breed": 1,
       "photo": "dogs/1640386616_1-sobakovod-club-p-sobaki-dzhek-rasa-sobaka-1.jpg",
       "birth_date": "2022-01-05",
+      "is_active": true,
       "owner": 1
     }
   },

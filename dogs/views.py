@@ -10,6 +10,7 @@ from django.forms import inlineformset_factory
 
 from dogs.models import Breed, Dog, DogParent
 from dogs.forms import DogForm, DogParentForm
+from users.models import UserRoles
 
 
 def index_view(request):
@@ -20,14 +21,6 @@ def index_view(request):
     }
     return render(request, 'dogs/index.html', context=context)
 
-
-# def breeds_list_view(request):
-#     """Функция отображает список всех пород собак, доступных в питомнике."""
-#     context = {
-#         'object_list': Breed.objects.all(),
-#         'title': "Питомник - Все наши породы"
-#     }
-#     return render(request, 'dogs/breeds.html',context=context)
 
 class BreedListView(ListView):
     model = Breed
@@ -56,6 +49,26 @@ class DogListView(ListView):
     }
     template_name = 'dogs/dogs.html'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(is_active=True)
+        return queryset
+
+
+class DogDeactivatedListView(LoginRequiredMixin, ListView):
+    model = Dog
+    extra_context = {
+        'title': 'Питомник - все наши собаки'
+    }
+    template_name = 'dogs/dogs.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.request.user.role in [UserRoles.ADMIN, UserRoles.MODERATOR]:
+            queryset = queryset.filter(is_active=False)
+        if self.request.user.role == UserRoles.USER:
+            queryset = queryset.filter(is_active = False, owner=self.request.user)
+        return queryset
 
 class DogCreateView(LoginRequiredMixin, CreateView):
     model = Dog
