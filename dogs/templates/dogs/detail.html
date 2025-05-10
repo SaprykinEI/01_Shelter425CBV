@@ -18,10 +18,6 @@
         </div>
 
         <div class="card-footer">
-            {% if user.is_staff or user == object.owner %}
-            <a class="btn btn-link" href="{% url 'dogs:dog_update' object.pk %}">Обновить</a>
-            <a class="btn btn-link" href="{% url 'dogs:dog_delete' object.pk %}">Удалить</a>
-            {% endif %}
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 {% extends 'dogs/base.html' %}
 {% load my_tags %}
-{% block content %}
+{% block content%}
 <form method="post" enctype="multipart/form-data" class="row">
     <div class="col-6">
         <div class="card">
@@ -8,34 +8,45 @@
                 {% if object %}
                 Обновите данные собаки
                 {% else %}
-                Введите данные собаки
+                Введите данные собаки!
                 {% endif %}
             </div>
             <img class="card-img-top"
-                 src="{{ object.photo|dogs_media }}" width="300" height="400"
+                 src="{{ object.photo|dogs_media }}" width=100%
                  alt="Card image cap">
             <div class="card-body">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="bt btn-outline-success">
-                    {% if object %}
-                    Сохранить
+                {{ form.as_p}}
+                <input type="submit" class="btn btn-outline-success"
+                value="{% if object %}Сохранить{% else %}Добавить{% endif %}">
+                <a href="{% url 'dogs:dog_toggle_activity' object.pk %}"
+                   class="btn btn-outline-warning float-right">
+                    {% if object.is_active %}
+                    Деактивировать
                     {% else %}
-                    Добавить
+                    Активация
                     {% endif %}
-                </button>
+                </a>
             </div>
+        </div>
+        <div class="card-footer">
+            <a href="{url 'dogs:dogs_list' %}" class="btn btn-outline-primary"><< Назад</a>
+            {% if object and user.is_superuser %}
+            <a href="{% url 'dogs:dog_delete' object.pk %}" class="btn btn-outline-danger float-right">Удалить</a>
+            {% endif %}
         </div>
     </div>
     <div class="col-6">
-        <div class="card-body">
-            {{ formset.management_form }}
-            {% for form in formset.forms %}
-            {{ form.as_p }}
-            {% if not forloop.last %}
-            <hr>
-            {% endif %}
-            {% endfor %}
+        <div class="card">
+            <div class="card-body">
+                {{ formset.management_form }}
+                {% for from in formset.forms %}
+                {{ form.as_p }}
+                {% if not forloop.last %}
+                <hr>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </form>
