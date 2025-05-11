@@ -10,7 +10,7 @@ from django.forms import inlineformset_factory
 from django.core.exceptions import PermissionDenied
 
 from dogs.models import Breed, Dog, DogParent
-from dogs.forms import DogForm, DogParentForm
+from dogs.forms import DogForm, DogParentForm, DogAdminForm
 from dogs.services import send_views_email
 from users.models import UserRoles
 
@@ -121,6 +121,16 @@ class DogUpdateView(LoginRequiredMixin, UpdateView):
         if self.object.owner != self.request.user and not self.request.user.role != UserRoles.ADMIN:
             raise PermissionDenied()
         return self.object
+
+    def get_form_class(self):
+        dog_forms = {
+            UserRoles.ADMIN: DogAdminForm,
+            UserRoles.MODERATOR: DogForm,
+            UserRoles.USER: DogForm,
+        }
+        user_role = self.request.user.role
+        dog_form_class = dog_forms[user_role]
+        return dog_form_class
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
