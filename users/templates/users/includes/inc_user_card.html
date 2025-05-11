@@ -14,7 +14,8 @@
         <li>Телефон: {{ object.phone|default:'не указан' }}</li>
         <li>Телеграм: {{ object.email|default:'не указан' }}</li>
       </ul>
-
+      <a class="btn btn-lg btn-lock btn-outline-info"
+         href="{% url 'users:user_detail' object.pk %}">Подробная информация </a>
     </div>
   </div>
 </div>

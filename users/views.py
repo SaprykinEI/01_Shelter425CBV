@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 import random
@@ -95,6 +95,17 @@ class UserListView(LoginRequiredMixin, ListView):
         queryset = super().get_queryset()
         queryset = queryset.filter(is_active=True)
         return queryset
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'users/user_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data()
+        user_obj = context_data['object']
+        context_data['title'] = f"Профиль пользователя {user_obj}"
+        return context_data
 
 
 @login_required(login_url='users:user_login')
