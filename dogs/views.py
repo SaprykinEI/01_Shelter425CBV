@@ -18,7 +18,7 @@ from users.models import UserRoles
 def index_view(request):
     """Функция отвечает за отображение главной страницы питомника."""
     context = {
-        'object_list': Breed.objects.all()[:3],
+        'object_list': Breed.objects.all(),
         'title': "Питомник - Главная"
     }
     return render(request, 'dogs/index.html', context=context)

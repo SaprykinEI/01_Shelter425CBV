@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # project apps
     'users',
     'dogs',
+    'reviews',
 
 ]
 
