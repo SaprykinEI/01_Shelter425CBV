@@ -34,7 +34,7 @@ class ReviewDeactivatedListView(ListView):
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = ReviewAdminForm
-    template_name = 'reviews/create.html'
+    template_name = 'reviews/create_update.html'
     extra_context = {
         'title': 'Добавить отзыв'
     }
@@ -50,7 +50,7 @@ class ReviewDetailView(DetailView):
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     model = Review
     form_class = ReviewAdminForm
-    template_name = 'reviews/update.html'
+    template_name = 'reviews/create_update.html'
     extra_context = {
         'title': 'Изменить отзыв'
     }
