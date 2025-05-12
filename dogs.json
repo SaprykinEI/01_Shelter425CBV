@@ -64,12 +64,36 @@
     }
   },
   {
+    "model": "dogs.breed",
+    "pk": 9,
+    "fields": {
+      "name": "Американский питбультерьер",
+      "description": "Боец"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 10,
+    "fields": {
+      "name": "Ротвейлер",
+      "description": "Большой"
+    }
+  },
+  {
+    "model": "dogs.breed",
+    "pk": 11,
+    "fields": {
+      "name": "Шпиц Померанский",
+      "description": "пушистый"
+    }
+  },
+  {
     "model": "dogs.dog",
     "pk": 1,
     "fields": {
       "name": "Ричард",
       "breed": 5,
-      "photo": "dogs/izobrazhenie_2024_12_03_001233555.png",
+      "photo": "dogs/03c4b825dc5e3ce5b6337ae37af057ee.jpg",
       "birth_date": "2022-01-05",
       "is_active": true,
       "owner": 1,
@@ -82,7 +106,7 @@
     "fields": {
       "name": "Мухтар",
       "breed": 3,
-      "photo": "dogs/Berger_allemand_en_montagne.jpg",
+      "photo": "dogs/2f50e8e238b70c929705ca7a0400d283.jpg",
       "birth_date": "2023-10-08",
       "is_active": true,
       "owner": 2,
@@ -95,11 +119,11 @@
     "fields": {
       "name": "Лесси",
       "breed": 2,
-      "photo": "dogs/eafe1d2fe8b2668cbfc88cdf31c8d787.jpeg",
+      "photo": "dogs/5e2bc2201c65d1cebf415cf60b09fc5e.jpg",
       "birth_date": "2024-10-16",
       "is_active": true,
       "owner": 3,
-      "views": 0
+      "views": 1
     }
   },
   {
@@ -108,7 +132,7 @@
     "fields": {
       "name": "Бэтти",
       "breed": 4,
-      "photo": "dogs/orig.jpeg",
+      "photo": "dogs/676_iTfyFyO.jpg",
       "birth_date": "2021-10-27",
       "is_active": true,
       "owner": 1,
@@ -121,7 +145,7 @@
     "fields": {
       "name": "Майло",
       "breed": 1,
-      "photo": "dogs/748328-15761233650457704_origin.png",
+      "photo": "dogs/e86c97a068fa7a89f042afc6983fd620.jpg",
       "birth_date": "2023-10-08",
       "is_active": true,
       "owner": 1,
@@ -134,7 +158,7 @@
     "fields": {
       "name": "Терри",
       "breed": 6,
-      "photo": "dogs/9c3a161254af0369c2a32bae240da2ff.jpg",
+      "photo": "dogs/Beagle-dog-grass-summer_iphone_640x960.jpg",
       "birth_date": "2024-10-16",
       "is_active": true,
       "owner": 3,
@@ -147,7 +171,7 @@
     "fields": {
       "name": "Джек",
       "breed": 7,
-      "photo": "dogs/scale_1200.jpeg",
+      "photo": "dogs/c3d990699bb1a81c10f3d7e45d9131e2.jpg",
       "birth_date": "2024-10-16",
       "is_active": true,
       "owner": 3,
@@ -160,11 +184,63 @@
     "fields": {
       "name": "Шарик",
       "breed": 8,
-      "photo": "dogs/fc5e52ce8b50ca725a7b75730d055e80.jpg",
+      "photo": "dogs/7302.jpg",
       "birth_date": "2023-10-08",
       "is_active": true,
       "owner": 4,
       "views": 22
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 9,
+    "fields": {
+      "name": "Рикки",
+      "breed": 5,
+      "photo": "dogs/6070f1184e62f25ce815d213177d7490.jpg",
+      "birth_date": "2025-01-16",
+      "is_active": true,
+      "owner": 5,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 10,
+    "fields": {
+      "name": "Рекс",
+      "breed": 9,
+      "photo": "dogs/6c9c715f564ea3ab72ba9fcae15657dd.jpg",
+      "birth_date": "2022-01-05",
+      "is_active": true,
+      "owner": 5,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 11,
+    "fields": {
+      "name": "Принц",
+      "breed": 10,
+      "photo": "dogs/ba42b5e0abfebdb09be0b72e84547bea.jpg",
+      "birth_date": "2025-05-08",
+      "is_active": true,
+      "owner": 3,
+      "views": 0
+    }
+  },
+  {
+    "model": "dogs.dog",
+    "pk": 12,
+    "fields": {
+      "name": "Нола",
+      "breed": 11,
+      "photo": "dogs/a02f2b49484d67b2f005523eb436e99a_medium-844x1000.jpeg",
+      "birth_date": "2025-01-16",
+      "is_active": true,
+      "owner": 1,
+      "views": 0
     }
   },
   {
