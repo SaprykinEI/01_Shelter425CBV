@@ -7,6 +7,7 @@ from django.core.exceptions import PermissionDenied
 from reviews.models import Review
 from users.models import User, UserRoles
 from reviews.forms import ReviewAdminForm
+from reviews.utils import slug_generator
 
 
 class ReviewListView(ListView):
@@ -46,6 +47,16 @@ class ReviewDetailView(DetailView):
         'title': "Просмотр отзыва"
     }
 
+    def form_valid(self, form):
+        if self.request.user.role not in [UserRoles.USER, UserRoles.ADMIN]:
+            return HttpResponseForbidden
+        slug_object = form.save
+        print(slug_object.slug)
+        if slug_object.slug == 'temp_slug':
+            slug_object.slug = slug_generator()
+        slug_object.author = self.request.user
+        slug_object.save()
+        return super().form_valid(form)
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     model = Review
