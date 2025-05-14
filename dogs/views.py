@@ -90,7 +90,7 @@ class DogCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class DogDetailView(DetailView):
+class DogDetailView(LoginRequiredMixin, DetailView):
     model = Dog
     template_name = 'dogs/detail.html'
 
