@@ -2,6 +2,7 @@
 {% load my_tags %}
 {% block content %}
 <div class="container">
+    <a href="{% url 'dogs:dog_create' %}" class="btn btn-outline-primary m-2 float-top" >Добавить собаку</a>
     <div class="row">
         {% for object in object_list %}
         {% include 'dogs/includes/inc_dog_card.html' with object=object %}

@@ -2,6 +2,7 @@ from django import forms
 from reviews.models import Review
 from users.forms import StyleFormMixin
 
+
 class ReviewAdminForm(StyleFormMixin, forms.ModelForm):
     title = forms.CharField(max_length=150, label='Заголовок')
     content = forms.TextInput()
