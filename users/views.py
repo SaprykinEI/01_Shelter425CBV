@@ -90,6 +90,7 @@ class UserListView(LoginRequiredMixin, ListView):
         'title': "Питомник все наши пользователи"
     }
     template_name = 'users/users.html'
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = super().get_queryset()

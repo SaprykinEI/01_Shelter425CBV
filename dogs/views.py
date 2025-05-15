@@ -18,7 +18,7 @@ from users.models import UserRoles
 def index_view(request):
     """Функция отвечает за отображение главной страницы питомника."""
     context = {
-        'object_list': Breed.objects.all(),
+        'object_list': Breed.objects.all()[:3],
         'title': "Питомник - Главная"
     }
     return render(request, 'dogs/index.html', context=context)
@@ -30,6 +30,7 @@ class BreedListView(ListView):
         'title': 'Все наши породы'
     }
     template_name = 'dogs/breeds.html'
+    paginate_by = 3
 
 
 class DogBreedListView(LoginRequiredMixin, ListView):
@@ -50,6 +51,7 @@ class DogListView(ListView):
         'title': 'Питомник - все наши собаки'
     }
     template_name = 'dogs/dogs.html'
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = super().get_queryset()
