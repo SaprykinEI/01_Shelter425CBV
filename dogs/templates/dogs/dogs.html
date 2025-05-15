@@ -1,7 +1,7 @@
 {% extends 'dogs/base.html'%}
 {% load my_tags %}
 {% block content %}
-{% include 'dogs/includes/inc_search_fields.html' %}
+{% include 'dogs/includes/inc_search_dog_fields.html' %}
 <div class="container">
     <a href="{% url 'dogs:dog_create' %}" class="btn btn-outline-primary m-2 float-top" >Добавить собаку</a>
     <div class="row">
