@@ -40,6 +40,18 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         'title': 'Добавить отзыв'
     }
 
+    def form_valid(self, form):
+        if self.request.user.role not in [UserRoles.USER, UserRoles.ADMIN]:
+            return HttpResponseForbidden
+        slug_object = form.save()
+        print(slug_object.slug)
+        if slug_object.slug == 'temp_slug':
+            slug_object.slug = slug_generator()
+            print(slug_object.slug)
+        slug_object.author = self.request.user
+        slug_object.save()
+        return super().form_valid(form)
+
 class ReviewDetailView(DetailView):
     model = Review
     template_name = 'reviews/detail.html'
@@ -47,16 +59,7 @@ class ReviewDetailView(DetailView):
         'title': "Просмотр отзыва"
     }
 
-    def form_valid(self, form):
-        if self.request.user.role not in [UserRoles.USER, UserRoles.ADMIN]:
-            return HttpResponseForbidden
-        slug_object = form.save
-        print(slug_object.slug)
-        if slug_object.slug == 'temp_slug':
-            slug_object.slug = slug_generator()
-        slug_object.author = self.request.user
-        slug_object.save()
-        return super().form_valid(form)
+
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
     model = Review
