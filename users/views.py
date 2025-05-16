@@ -77,6 +77,7 @@ class UserPasswordChangeView(PasswordChangeView):
         context_data['title'] = f"Изменить пароль {self.request.user}"
         return context_data
 
+
 class UserLogoutView(LogoutView):
     template_name = 'users/user_logout.html'
     extra_context = {

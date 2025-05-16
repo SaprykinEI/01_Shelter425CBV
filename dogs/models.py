@@ -5,6 +5,7 @@ from users.models import NULLABLE
 
 # Create your models here.
 
+
 class Breed(models.Model):
     name = models.CharField(max_length=100, verbose_name='Порода')
     description = models.CharField(max_length=1000, verbose_name='Описание породы')

@@ -5,6 +5,7 @@ from django import forms
 from dogs.models import Dog, DogParent
 from users.forms import StyleFormMixin
 
+
 class DogForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Dog

@@ -54,13 +54,13 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         slug_object.save()
         return super().form_valid(form)
 
+
 class ReviewDetailView(DetailView):
     model = Review
     template_name = 'reviews/detail.html'
     extra_context = {
         'title': "Просмотр отзыва"
     }
-
 
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):
@@ -76,6 +76,7 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
         if object_.author != self.request.user and self.request.user.role not in [UserRoles.ADMIN, UserRoles.MODERATOR]:
             raise PermissionDenied()
         return object_
+
     def get_success_url(self):
         return reverse('review:review_detail', args=[self.kwargs.get('slug')])
 

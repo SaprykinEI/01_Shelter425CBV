@@ -3,8 +3,6 @@ from django.urls import path
 from users.apps import UsersConfig
 from users.views import (UserRegisterView, UserProfileView, UserLoginView, UserLogoutView, UserUpdateView,
                          UserPasswordChangeView, user_generate_new_password_view, UserListView, UserDetailView)
-from django.core.exceptions import ValidationError
-
 
 app_name = UsersConfig.name
 
@@ -19,7 +17,7 @@ urlpatterns = [
     path('change_password/', UserPasswordChangeView.as_view(), name='user_change_password'),
     path('profile/genpassword', user_generate_new_password_view, name='user_generate_new_password'),
 
-    #Просмотр других пользвателей
+    # Просмотр других пользвателей
     path('all_users/', UserListView.as_view(), name='users_list'),
     path('profile/<int:pk>/', UserDetailView.as_view(), name='user_detail'),
 ]

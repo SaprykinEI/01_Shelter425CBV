@@ -24,4 +24,3 @@ class Review(models.Model):
     class Meta:
         verbose_name = 'review'
         verbose_name_plural = 'reviews'
-

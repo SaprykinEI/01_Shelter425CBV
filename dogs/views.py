@@ -1,9 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template.context_processors import request
 
-from django.http import Http404
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
@@ -124,6 +121,7 @@ class BreedDogSearchListView(LoginRequiredMixin, ListView):
         object_list = list(dog_object_list) + list(breed_object_list)
         return object_list
 
+
 class DogCreateView(LoginRequiredMixin, CreateView):
     model = Dog
     form_class = DogForm
@@ -135,7 +133,7 @@ class DogCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         if self.request.user.role != UserRoles.USER:
-            raise  PermissionDenied
+            raise PermissionDenied
         self.object = form.save()
         self.object.owner = self.request.user
         self.object.save()
