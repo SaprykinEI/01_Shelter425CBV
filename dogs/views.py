@@ -14,7 +14,7 @@ from users.models import UserRoles
 
 
 def index_view(request):
-    """Функция отвечает за отображение главной страницы питомника."""
+    """ Отображает главную страницу питомника с тремя первыми породами."""
     context = {
         'object_list': Breed.objects.all()[:3],
         'title': "Питомник - Главная"
@@ -23,6 +23,7 @@ def index_view(request):
 
 
 class BreedListView(ListView):
+    """Представление для отображения списка всех пород с пагинацией."""
     model = Breed
     extra_context = {
         'title': 'Все наши породы'
@@ -32,6 +33,8 @@ class BreedListView(ListView):
 
 
 class BreedSearchListView(LoginRequiredMixin, ListView):
+    """ Представление для поиска пород по названию.
+        Только для авторизованных пользователей. """
     model = Breed
     template_name = 'dogs/breeds.html'
     extra_context = {
@@ -47,6 +50,8 @@ class BreedSearchListView(LoginRequiredMixin, ListView):
 
 
 class DogBreedListView(LoginRequiredMixin, ListView):
+    """Представление для отображения собак определённой породы.
+        Только для авторизованных пользователей."""
     model = Dog
     template_name = 'dogs/dogs.html'
     extra_context = {
@@ -59,6 +64,7 @@ class DogBreedListView(LoginRequiredMixin, ListView):
 
 
 class DogListView(ListView):
+    """Представление для отображения всех активных собак в питомнике."""
     model = Dog
     extra_context = {
         'title': 'Питомник - все наши собаки'
@@ -73,6 +79,9 @@ class DogListView(ListView):
 
 
 class DogDeactivatedListView(LoginRequiredMixin, ListView):
+    """Представление для отображения деактивированных собак.
+    Для администратора и модератора — все деактивированные.
+    Для пользователя — только его собственные деактивированные собаки."""
     model = Dog
     extra_context = {
         'title': 'Питомник - все наши собаки'
@@ -89,6 +98,8 @@ class DogDeactivatedListView(LoginRequiredMixin, ListView):
 
 
 class DogSearchListView(LoginRequiredMixin, ListView):
+    """ Представление для поиска собак по имени среди активных.
+        Только для авторизованных пользователей."""
     model = Dog
     template_name = 'dogs/dogs.html'
     extra_context = {
@@ -104,6 +115,9 @@ class DogSearchListView(LoginRequiredMixin, ListView):
 
 
 class BreedDogSearchListView(LoginRequiredMixin, ListView):
+    """Представление для отображения результатов поиска по имени собак и названиям пород.
+        Объединяет результаты поиска по моделям Dog и Breed.
+        Только для авторизованных пользователей."""
     model = Breed
     template_name = 'dogs/breed_dog_search_results.html'
     extra_context = {
@@ -123,6 +137,9 @@ class BreedDogSearchListView(LoginRequiredMixin, ListView):
 
 
 class DogCreateView(LoginRequiredMixin, CreateView):
+    """Представление для создания новой собаки.
+        Доступно только обычным пользователям. После создания собака автоматически
+        привязывается к текущему пользователю."""
     model = Dog
     form_class = DogForm
     template_name = 'dogs/create.html'
@@ -141,6 +158,10 @@ class DogCreateView(LoginRequiredMixin, CreateView):
 
 
 class DogDetailView(LoginRequiredMixin, DetailView):
+    """Представление для отображения подробной информации о собаке.
+
+        Также увеличивает счётчик просмотров для не-владельцев и
+        отправляет email владельцу при достижении кратного 20 количества просмотров."""
     model = Dog
     template_name = 'dogs/detail.html'
 
@@ -159,6 +180,11 @@ class DogDetailView(LoginRequiredMixin, DetailView):
 
 
 class DogUpdateView(LoginRequiredMixin, UpdateView):
+    """Представление для редактирования данных о собаке.
+
+        Проверяет права доступа: пользователь может редактировать только своих собак.
+        Использует разные формы в зависимости от роли пользователя.
+        Также позволяет редактировать родительские связи собаки."""
     model = Dog
     form_class = DogForm
     template_name = 'dogs/create_update.html'
@@ -206,6 +232,8 @@ class DogUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class DogDeleteView(PermissionRequiredMixin, DeleteView):
+    """Представление для удаления собаки. Требует права 'delete_dog'.
+        Показывает страницу подтверждения удаления."""
     model = Dog
     template_name = 'dogs/delete.html'
     success_url = reverse_lazy('dogs:dogs_list')
@@ -220,6 +248,7 @@ class DogDeleteView(PermissionRequiredMixin, DeleteView):
 
 
 def dog_toggle_activity(request, pk):
+    """Переключает активность собаки (активна/неактивна)."""
     dog_item = get_object_or_404(Dog, pk=pk)
     if dog_item.is_active:
         dog_item.is_active = False

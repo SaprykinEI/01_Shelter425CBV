@@ -6,6 +6,8 @@ from dogs.models import Breed
 
 
 def get_breed_cache():
+    """Получает список пород из кэша, если включено кэширование.
+        Если данные отсутствуют в кэше, извлекает их из базы данных и сохраняет в кэш."""
     if settings.CACHE_ENABLED:
         key = 'breed_list'
         breed_list = cache.get(key)
@@ -19,6 +21,7 @@ def get_breed_cache():
 
 
 def send_views_email(dog_object, owner_email, views_count):
+    """Отправляет email владельцу собаки при достижении определённого количества просмотров."""
     send_mail(
         subject=f'{views_count} просмотров {dog_object}',
         message=f"Запись {dog_object}, уже просмотрели {views_count} человек.",

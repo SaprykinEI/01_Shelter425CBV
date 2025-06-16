@@ -7,6 +7,7 @@ from users.models import NULLABLE
 
 
 class Breed(models.Model):
+    """Модель, представляющая породу собаки."""
     name = models.CharField(max_length=100, verbose_name='Порода')
     description = models.CharField(max_length=1000, verbose_name='Описание породы')
 
@@ -19,6 +20,7 @@ class Breed(models.Model):
 
 
 class Dog(models.Model):
+    """Модель, представляющая собаку питомника"""
     name = models.CharField(max_length=250, verbose_name='Кличка')
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE, verbose_name='Порода')
     photo = models.ImageField(upload_to='dogs/', **NULLABLE, verbose_name='Фотография')
@@ -40,6 +42,7 @@ class Dog(models.Model):
 
 
 class DogParent(models.Model):
+    """Модель, представляющая родителя собаки."""
     dogs = models.ForeignKey(Dog, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, verbose_name='Кличка Родителя')
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE, verbose_name='порода родителя')
