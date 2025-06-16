@@ -5,6 +5,12 @@ from django.core.exceptions import ValidationError
 
 
 def validate_password(field):
+    """
+        Валидатор пароля для проверки соответствия требованиям.
+
+        Проверяет, что пароль состоит только из латинских букв (A-Z, a-z) и цифр (0-9),
+        а также что длина пароля находится в диапазоне от 8 до 16 символов включительно.
+        """
     pattern = re.compile(r'^[A-Za-z0-9]+$')
     language = settings.LANGUAGE_CODE
     error_messages = [
